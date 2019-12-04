@@ -1,0 +1,62 @@
+---
+- hosts: teste
+  user: centos
+  become: yes
+  tasks:
+    - name: Atualizando pacotes
+      shell: yum -y update
+         
+    - name: Instalando Epel
+      yum: name=epel-release state=present
+         
+    - name: Instalando wget
+      yum: name=wget state=present
+         
+    - name: Instalando nginx
+      yum: name=nginx state=present
+                          
+    - name: Instalando mariadb-server
+      yum: name=mariadb-server state=present
+         
+    - name: Instalando php
+      yum: name=php-fpm state=present          
+         
+    - name: Instalando php-common
+      yum: name=php-common state=present
+         
+    - name: Instalando php-mysql
+      yum: name=php-mysql state=present
+         
+    - name: Instalando php-gd
+      yum: name=php-gd state=present
+         
+    - name: Instalando php-xml
+      yum: name=php-xml state=present
+         
+    - name: Instalando php-mbstring
+      yum: name=php-mbstring state=present
+         
+    - name: Instalando php-mcrypt
+      yum: name=php-mcrypt state=present
+         
+    - name: Reiniciando Daeler
+      service: name=daemon_reload
+         
+    - name: Iniciando Nginx
+      shell: systemctl start nginx
+         
+    - name: Iniciando Mysqld
+      shell: systemctl start mariadb
+          
+    - name: Criando pasta PHP
+      shell: rm -rf /var/run/php && mkdir /var/run/php && chmod 755 /var/run/php
+         
+    - name: Startando php-fpm
+      shell: systemctl start php-fpm
+            
+          
+          
+          
+
+  
+          
